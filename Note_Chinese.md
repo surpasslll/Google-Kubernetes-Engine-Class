@@ -23,5 +23,5 @@ Scheduler：调度器，“调度器”顾名思义就是完成调度的操作�
 ## Node
 * Node 是真正运行业务负载的，每个业务负载会以 Pod 的形式运行
 * 一个 Pod 中运行的一个或者多个容器，真正去运行这些 Pod 的组件的是叫做 kubelet,它通过 API Server 接收到所需要 Pod 运行的状态，然后提交到Container Runtime 组件中。
-![image](/node.png)
+![image](https://github.com/surpasslll/Google-Kubernetes-Engine-Class/blob/master/Node.png)
 
