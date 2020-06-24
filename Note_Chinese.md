@@ -12,12 +12,12 @@
 # Kubernetes 的架构
 * 比较典型的二层架构和 server-client 架构。Master 作为中央的管控节点，会去与 Node 进行一个连接。
 * Kubernetes 的 Master 包含四个主要的组件：API Server、Controller、Scheduler 以及 etcd
-etcd：是一个分布式的一个存储系统，API Server 中所需要的这些原信息都被放置在 etcd 中，
+1. etcd：是一个分布式的一个存储系统，API Server 中所需要的这些原信息都被放置在 etcd 中，
    etcd 本身是一个高可用系统(高可用是系统架构设计中必须要考虑的，是指系统所能提供无故障服务的一种能力。简单的说就是避免因服务器宕机而造成的服务不可用的情况，像Elasticsearch并不会因为一节点的宕机而造成整个搜索服务不可用)，通过 etcd 保证整个 Kubernetes 的 Master 组件的高可用性
-API Server：Kubernetes 中所有的组件都会和 API Server 进行连接，组件与组件之间一般不进行独立的连接，都依赖于 API Server 进行消息的传送；
-Controller：控制器，它用来完成对集群状态的一些管理。
+2. API Server：Kubernetes 中所有的组件都会和 API Server 进行连接，组件与组件之间一般不进行独立的连接，都依赖于 API Server 进行消息的传送；
+3. Controller：控制器，它用来完成对集群状态的一些管理。
   比如刚刚我们提到的两个例子之中，第一个自动对容器进行修复、第二个自动进行水平扩张，都是由 Kubernetes 中的 Controller 来进行完成的；
-Scheduler：调度器，“调度器”顾名思义就是完成调度的操作，
+4. Scheduler：调度器，“调度器”顾名思义就是完成调度的操作，
   就是我们刚才介绍的第一个例子中，把一个用户提交的 Container，依据它对 CPU、对 memory 请求大小，找一台合适的节点，进行放置；
   
 ## Node
@@ -32,5 +32,12 @@ Scheduler：调度器，“调度器”顾名思义就是完成调度的操作�
  
 这个时候 API Server 接收到这次操作之后，会把这次的结果再次写到 etcd 中，然后 API Server 会通知相应的节点进行这次 Pod 真正的执行启动。相应节点的 kubelet 会得到这个通知，kubelet 就会去调 Container runtime 来真正去启动配置这个容器和这个容器的运行环境，去调度 Storage Plugin 来去配置存储，network Plugin 去配置网络。
 
+
+## Pod
+* Kubernetes的一个最小调度以及资源单元
+* 一个 Pod 简单来说是对一组容器的抽象，它里面会包含一个或多个容器
+
+## Volume
+* Kubernetes的
 
 
