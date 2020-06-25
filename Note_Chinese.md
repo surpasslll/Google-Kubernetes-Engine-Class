@@ -26,18 +26,39 @@
 ![image](https://github.com/surpasslll/Google-Kubernetes-Engine-Class/blob/master/Node.png)
 * Kubernetes 并不会直接进行网络存储的操作，他们会靠 Storage Plugin 或者是网络的 Plugin 来进行操作
 * 调度示例：
-用户可以通过 UI 或者 CLI 提交一个 Pod 给 Kubernetes 进行部署，这个 Pod 请求首先会通过 CLI 或者 UI 提交给 Kubernetes API Server，下一步 API Server 会把这个信息写入到它的存储系统 etcd，之后 Scheduler 会通过 API Server 的 watch 或者叫做 notification 机制得到这个信息：有一个 Pod 需要被调度。
- 
-这个时候 Scheduler 会根据它的内存状态进行一次调度决策，在完成这次调度之后，它会向 API Server report 说：“OK！这个 Pod 需要被调度到某一个节点上。”
- 
-这个时候 API Server 接收到这次操作之后，会把这次的结果再次写到 etcd 中，然后 API Server 会通知相应的节点进行这次 Pod 真正的执行启动。相应节点的 kubelet 会得到这个通知，kubelet 就会去调 Container runtime 来真正去启动配置这个容器和这个容器的运行环境，去调度 Storage Plugin 来去配置存储，network Plugin 去配置网络。
+1. 用户可以通过 UI 或者 CLI 提交一个 Pod 给 Kubernetes 进行部署
+2. 这个 Pod 请求首先会通过 CLI 或者 UI 提交给 Kubernetes API Server
+3. API Server 会把这个信息写入到它的存储系统 etcd
+4. Scheduler 会通过 API Server 的 watch 或者叫做 notification 机制得到这个信息：有一个 Pod 需要被调度。
+5. Scheduler 会根据它的内存状态进行一次调度决策
+6. 在完成这次调度之后，它会向 API Server report 说：“OK！这个 Pod 需要被调度到某一个节点上。”
+7. API Server 接收到这次操作之后，会把这次的结果再次写到 etcd 中，然后 API Server 会通知相应的节点进行这次 Pod 真正的执行启动。
+8. 相应节点的 kubelet 会得到这个通知，kubelet 就会去调 Container runtime 来真正去启动配置这个容器和这个容器的运行环境，去调度 Storage Plugin 来去配置存储，network Plugin 去配置网络。
 
 
 ## Pod
 * Kubernetes的一个最小调度以及资源单元
 * 一个 Pod 简单来说是对一组容器的抽象，它里面会包含一个或多个容器
+* 在 Pod 里面，我们也可以去定义容器所需要运行的方式。
 
 ## Volume
-* Kubernetes的
+* 抽象的概念
+* 用来管理 Kubernetes 存储的，是用来声明在 Pod 中的容器可以访问文件目录的
+* 一个卷可以被挂载在 Pod 中一个或者多个容器的指定路径下面
+* 可以支持本地的存储，可以支持分布式的存储, 也可以支持云存储 
+---------------------- 数据库及存储 ----------------------------------
+1. 随着数据量的高速增长，关系型数据库逐渐暴露出一些局限性，比如数据库访问速度、扩展性
+2. 传统的关系型数据库开始从集中式模型向分布式架构发展，基于关系型的分布式数据库在保留了传统数据库的数据模型和基本特征下，从集中式存储走向分布式存储，从集中式计算走向分布式计算
+3. 分布式数据库是指利用高速计算机网络将物理上分散的多个数据存储单元连接起来组成一个逻辑上统一的数据库。
+4. 分布式数据库的基本思想是将原来集中式数据库中的数据分散存储到多个通过网络连接的数据存储节点上，以获取更大的存储容量和更高的并发访问量。
+5. 分布式数据库优势：更高的数据访问速度(可以并发地从多个备份服务器同时读取)、更强的可扩展性、更高的并发访问量
+（More：阿里数据库课程 https://edu.aliyun.com/course/37/lesson/list）
+---------------------- 数据库及存储 ----------------------------------
+
+## Deployment
+* Pod 这个抽象上更为上层的一个抽象
+* 可以定义一组 Pod 的副本数目、以及这个 Pod 的版本
+* 
+
 
 
