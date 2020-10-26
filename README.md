@@ -3,6 +3,23 @@ Notes of Google Kubernetes Engine Class
 
 # Lab1
 ### Overview 
+1. client ping -c 3 192.168.2.2
+2. client traceroute -n 192.168.2.2
+3. client wget http://192.168.2.2
+4. client ping -c 3 172.64.3.1
+5. client wget http://192.168.2.1
+
+6. server1 ping -c 3 172.64.3.10
+7. server1 traceroute -n 172.64.3.10
+8. server1 wget http://172.64.3.10
+9. server1 ping -c 3 10.0.1.1
+10. server1 ping -c 3 172.64.3.11
+
+11. server2 ping -c 3 10.0.1.100
+12. server2 traceroute -n 10.0.1.100
+13. server2 ping -c 3 192.168.2.1
+14. server2 ping -c 3 10.0.1.101
+15. server2 wget http://10.0.1.1
 * Containers are a way of isolating programs or processes from each other. The primary aim of containers is to make programs easy to deploy in a way that doesn't cause them to break.
 * ref: docker build option: https://docs.docker.com/engine/reference/commandline/build/ 
 * dockerfile: https://docs.docker.com/engine/reference/builder/#expose
